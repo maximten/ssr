@@ -4,7 +4,7 @@ import { renderToString } from 'react-dom/server';
 import App from './app.js';
 import fs from 'fs';
 import webpack from 'webpack';
-import webpackConfig from '../webpack.config.js';
+import webpackConfig from '../webpack.dev.config.js';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
