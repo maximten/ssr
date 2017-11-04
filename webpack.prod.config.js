@@ -2,6 +2,7 @@ var webpack = require('webpack');
 
 module.exports = {
   entry: [
+    'babel-polyfill',
     __dirname + '/src/index.js'
   ],
   output: {
@@ -10,12 +11,10 @@ module.exports = {
     filename: 'bundle.js',
   },
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        use: ['babel-loader'],
-        exclude: [/node_modules/, /public/],
-      },
-    ],
+    rules: [{
+      test: /\.js$/,
+      use: ['babel-loader'],
+      exclude: [/node_modules/, /public/],
+    }, ],
   },
 };

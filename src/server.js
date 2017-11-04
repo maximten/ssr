@@ -1,3 +1,4 @@
+import 'babel-polyfill';
 import express from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -17,7 +18,8 @@ const port = 3000;
 if (process.env.NODE_ENV != 'production') {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {
-    noInfo: true, publicPath: webpackConfig.output.publicPath
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
   }));
   app.use(webpackHotMiddleware(compiler));
 }
