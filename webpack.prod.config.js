@@ -1,4 +1,5 @@
-var webpack = require('webpack');
+const webpack = require('webpack');
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -12,9 +13,12 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.js$/,
-      use: ['babel-loader'],
-      exclude: [/node_modules/, /public/],
-    }, ],
+        test: /\.js$/,
+        use: ['babel-loader'],
+        exclude: [/node_modules/, /public/],
+    },],
   },
+  plugins: [
+    new UglifyJSPlugin()
+  ],
 };
