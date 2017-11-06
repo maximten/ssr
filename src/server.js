@@ -11,8 +11,6 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 
 const app = express();
 const html = fs.readFileSync(__dirname + '/../public/template.html', 'utf8');
-const appString = renderToString(<App/>);
-const finalHtml = html.replace('<!--root-->', appString);
 const port = 3000;
 
 if (process.env.NODE_ENV != 'production') {
@@ -26,6 +24,9 @@ if (process.env.NODE_ENV != 'production') {
 
 app.use(express.static('public'));
 app.get('/*', (req, res) => {
+  const staticContext = {}
+  const appString = renderToString(<App location={req.url} context={staticContext}/>);
+  const finalHtml = html.replace('<!--root-->', appString);
   res.send(finalHtml);
 });
 app.listen(port);

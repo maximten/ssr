@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom'
 
 import { setCounter } from '../../redux/actions/counter';
 
@@ -14,14 +15,11 @@ class Counter extends Component {
         { counter }
         <button onClick={ setCounter.bind(this, counter + 1) }>+</button>
         <button onClick={ setCounter.bind(this, counter - 1) }>-</button>
+        <NavLink to="/info/ ">info</NavLink>
       </div>
     );
   }
 }
-
-Counter.defaultProps = {
-  children: null,
-};
 
 const mapStateToProps = state => ({
   counter: state.counter,
