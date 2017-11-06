@@ -19,6 +19,8 @@ module.exports = {
     },],
   },
   plugins: [
+    new webpack.IgnorePlugin(/^mongoose$/),
+    new webpack.IgnorePlugin(/^\/models\//),
     new UglifyJSPlugin()
   ],
 };

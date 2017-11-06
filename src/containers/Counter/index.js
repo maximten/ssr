@@ -15,7 +15,7 @@ class Counter extends Component {
         { counter }
         <button onClick={ setCounter.bind(this, counter + 1) }>+</button>
         <button onClick={ setCounter.bind(this, counter - 1) }>-</button>
-        <NavLink to="/info/ ">info</NavLink>
+        <NavLink to="/info/">info</NavLink>
       </div>
     );
   }
