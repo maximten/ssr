@@ -9,6 +9,10 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true
   },
+  preview: {
+    type: String,
+    required: true,
+  },
   text: {
     type: String,
     required: true,

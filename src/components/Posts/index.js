@@ -14,7 +14,7 @@ export default class Posts extends Component {
               return (
                 <div key={key} className="col-md-4">
                   <NavLink to={`/posts/${item.slug}`}><h2>{item.title}</h2></NavLink>
-                  <p>{item.text}</p>
+                  <p>{item.preview}</p>
                 </div>
               );
             }) 
