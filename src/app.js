@@ -6,12 +6,13 @@ import { Route, Redirect, Switch, BrowserRouter, StaticRouter } from 'react-rout
 import history from './history';
 import configureStore from './redux';
 import Counter from './containers/Counter';
+import AppContainer from './containers/AppContainer';
 import PostsContainer from './containers/PostsContainer';
 import PostContainer from './containers/PostContainer';
-import AppContainer from './components/AppContainer';
+import AuthContainer from './containers/AuthContainer';
 import Info from './components/Info';
 
-export default class App extends Component {
+export default class Main extends Component {
   render() {
     const { location, context, initialState } = this.props;
     const Router = process.env.NODE_SIDE == 'server' ? StaticRouter : BrowserRouter;
@@ -27,6 +28,7 @@ export default class App extends Component {
             <Switch>
               <Route exact path="/" component={() => <AppContainer><PostsContainer/></AppContainer>} />
               <Route exact path="/posts/:slug" component={({match : { params : { slug }}}) => <AppContainer><PostContainer slug={slug}/></AppContainer>} />
+              <Route exact path="/auth/" component={() => <AppContainer><AuthContainer/></AppContainer>} />
             </Switch>
           </div>
         </Router>

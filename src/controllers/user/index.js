@@ -22,7 +22,8 @@ function register(req, res, next) {
     return model.save();
   })
   .then(() => {
-    res.json('ok');
+    const { login, email, avatar } = model;
+    res.json({ login, email, avatar });
   })
   .catch((e) => {
     next(e);
@@ -37,7 +38,8 @@ function login(req, res, next) {
       req.session.user_id = item._id;
     } 
     req.session.save(() => {
-      res.json('ok');
+      const { login, email, avatar } = item;
+      res.json({ login, email, avatar });
     });
   })
   .catch((e) => {
