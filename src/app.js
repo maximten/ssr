@@ -6,8 +6,9 @@ import { Route, Redirect, Switch, BrowserRouter, StaticRouter } from 'react-rout
 import history from './history';
 import configureStore from './redux';
 import Counter from './containers/Counter';
-import Feed from './containers/Feed';
-import Post from './containers/Post';
+import PostsContainer from './containers/PostsContainer';
+import PostContainer from './containers/PostContainer';
+import AppContainer from './components/AppContainer';
 import Info from './components/Info';
 
 export default class App extends Component {
@@ -24,10 +25,8 @@ export default class App extends Component {
         <Router {...routerProps}>
           <div>
             <Switch>
-              <Route exact path="/" component={() => <Feed />} />
-              <Route exact path="/posts/:slug" component={({match : { params : { slug }}}) => <Post slug={slug}/>} />
-              <Route exact path="/counter/" component={() => <Counter />} />
-              <Route exact path="/info/" component={() => <Info />} />
+              <Route exact path="/" component={() => <AppContainer><PostsContainer/></AppContainer>} />
+              <Route exact path="/posts/:slug" component={({match : { params : { slug }}}) => <AppContainer><PostContainer slug={slug}/></AppContainer>} />
             </Switch>
           </div>
         </Router>

@@ -5,3 +5,5 @@ dist
 yarn.lock
 package-lock.json
 public/bundle.js
+public/css
+public/fonts

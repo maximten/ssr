@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom'
+import Helmet from 'react-helmet';
 
+import Posts from '../../components/Posts';
 import { fetchPosts } from '../../redux/actions/posts';
 
-class Feed extends Component {
+class PostsContainer extends Component {
   constructor(props) {
       super(props);
   }
@@ -16,14 +17,10 @@ class Feed extends Component {
     const { posts: { items, limit, skip , loading } } = this.props; 
     return (
       <div>
-        { items.map((item, key) => {
-          return (
-            <div key={key}>
-              <NavLink to={`/posts/${item.slug}`}><h2>{item.title}</h2></NavLink>
-              <p>{item.text}</p>
-            </div>
-          );
-        }) }
+        <Helmet>
+          <title>Posts</title>
+        </Helmet>
+        <Posts {...this.props}/>
       </div>
     );
   }
@@ -39,4 +36,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Feed);
+export default connect(mapStateToProps, mapDispatchToProps)(PostsContainer);

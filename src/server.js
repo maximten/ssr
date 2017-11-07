@@ -9,6 +9,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import bodyParser from 'body-parser';
 import multipartMiddleware from 'connect-multiparty';
+import Helmet from 'react-helmet';
 import webpackConfig from '../webpack.dev.config.js';
 import App from './app.js';
 import routes from './routes';
@@ -43,7 +44,10 @@ app.use('/api/v1', routes);
 app.get('/*', (req, res) => {
   getInitialState(req).then((initialState) => {
     const appString = renderToString(<App location={req.url} context={{}} initialState={initialState}/>);
-    const finalHtml = html.replace('<!--root-->', appString);
+    const helmet = Helmet.renderStatic();
+    const finalHtml = html
+    .replace('<!--root-->', appString)
+    .replace('<!--head-->', helmet.meta.toString() + helmet.link.toString() + helmet.title.toString());
     res.send(finalHtml);
   });
 });

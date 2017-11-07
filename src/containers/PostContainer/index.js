@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom'
+import Helmet from 'react-helmet';
 
+import Post from '../../components/Post';
 import { fetchPost } from '../../redux/actions/posts';
 
-class Post extends Component {
+class PostContainer extends Component {
   constructor(props) {
       super(props);
   }
@@ -20,8 +22,10 @@ class Post extends Component {
         {
           post && 
           <div>
-            <h1>{post.title}</h1>
-            <p>{post.text}</p>
+            <Helmet>
+              <title>{post.title}</title>
+            </Helmet>
+            <Post {...this.props}/>
           </div>
         }
       </div>
@@ -39,4 +43,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToProps, mapDispatchToProps)(PostContainer);

@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: [
@@ -8,7 +9,7 @@ module.exports = {
   ],
   output: {
     path: __dirname + '/public/',
-    publicPath: '/',
+    publicPath: '',
     filename: 'bundle.js',
   },
   module: {
@@ -22,6 +23,6 @@ module.exports = {
   },
   plugins: [
     new webpack.IgnorePlugin(/^mongoose$/),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
   ]
 };
