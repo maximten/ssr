@@ -18,7 +18,7 @@ import getInitialState from './state';
 
 const app = express();
 const html = fs.readFileSync(__dirname + '/../public/template.html', 'utf8');
-const port = 3000;
+const port = process.env.NODE_PORT || 3000;
 
 mongoose.connect(config.mongo.host, { server: { socketOptions: { keepAlive: 1 } } });
 mongoose.connection.on('error', () => {

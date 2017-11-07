@@ -1,0 +1,19 @@
+language: node_js
+
+node_js:
+  - 8
+
+script:
+  - npm run serve
+
+before_install:
+  - npm install -g webpack babel babel-node
+
+notifications:
+  email:
+    on_failure: change
+
+cache:
+  yarn: true
+  directories:
+    - node_modules

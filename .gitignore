@@ -3,6 +3,7 @@ dist
 .vscode
 .idea
 yarn.lock
+npm-debug.log
 package-lock.json
 public/bundle.js
 public/css
