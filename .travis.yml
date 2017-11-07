@@ -7,7 +7,7 @@ script:
   - npm run serve
 
 before_install:
-  - npm install -g webpack babel babel-node
+  - npm install -g webpack babel-cli
 
 notifications:
   email:
