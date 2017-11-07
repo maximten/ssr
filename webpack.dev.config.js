@@ -12,11 +12,13 @@ module.exports = {
     filename: 'bundle.js',
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      use: ['babel-loader'],
-      exclude: [/node_modules/, /public/],
-    }, ],
+    rules: [
+      {
+        test: /\.js$/,
+        use: ['babel-loader'],
+        exclude: [/node_modules/, /public/],
+      }, 
+    ],
   },
   plugins: [
     new webpack.IgnorePlugin(/^mongoose$/),
