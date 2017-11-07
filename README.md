@@ -1,5 +1,9 @@
 # React Server Side Rendering Example
 
+<a href="https://travis-ci.org/maximten/ssr">
+  <img src="https://travis-ci.org/maximten/ssr.svg?branch=master" alt="Build Status"/>
+</a>
+
 ### Commands
 Run development server:
 ```shell
