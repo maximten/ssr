@@ -20,6 +20,6 @@ function add(req, res, next) {
   .catch(e => next(e));
 }
 
-const postsController = { query, add }
+const PostsController = { query, add }
 
-export default postsController;
+export default PostsController;

@@ -9,6 +9,9 @@
   </a>
 </div>
 
+### Initialization
+Create app-token.txt with secret for sessions.
+
 ### Commands
 Run development server:
 ```shell

@@ -10,6 +10,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import bodyParser from 'body-parser';
 import multipartMiddleware from 'connect-multiparty';
 import Helmet from 'react-helmet';
+import session from 'express-session';
 import webpackConfig from '../webpack.dev.config.js';
 import App from './app.js';
 import routes from './routes';
@@ -18,6 +19,7 @@ import getInitialState from './state';
 
 const app = express();
 const html = fs.readFileSync(__dirname + '/../public/template.html', 'utf8');
+const appToken = fs.readFileSync(__dirname + '/../app-token.txt', 'utf8');
 const port = process.env.NODE_PORT || 3000;
 
 mongoose.connect(config.mongo.host, { server: { socketOptions: { keepAlive: 1 } } });
@@ -36,7 +38,13 @@ if (process.env.NODE_ENV != 'production') {
 
 app.use(multipartMiddleware());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+  secret: appToken,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}));
 
 app.use(express.static('public'));
 app.use('/api/v1', routes);

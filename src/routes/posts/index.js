@@ -1,10 +1,10 @@
 import express from 'express';
-import controllers from '../../controllers';
+import PostsController from '../../controllers/posts';
 
 const router = express.Router();
 
 router.route('/')
-.get(controllers.postsController.query)
-.post(controllers.postsController.add);
+.get(PostsController.query)
+.post(PostsController.add);
 
 export default router;

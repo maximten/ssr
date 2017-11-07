@@ -26,6 +26,7 @@
     "copy-webpack-plugin": "^4.2.0",
     "cross-env": "^5.1.1",
     "express": "^4.16.2",
+    "express-session": "^1.15.6",
     "faker": "^4.1.0",
     "mongoose": "^4.13.0",
     "react": "^16.0.0",
