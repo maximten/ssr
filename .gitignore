@@ -8,5 +8,7 @@ package-lock.json
 public/bundle.js
 public/css
 public/fonts
-scripts/test.js
+public/store
+src/scripts/store
+src/scripts/test.js
 app-token.txt

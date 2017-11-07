@@ -43,7 +43,7 @@ app.use(session({
   secret: appToken,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { secure: false }
 }));
 
 app.use(express.static('public'));
