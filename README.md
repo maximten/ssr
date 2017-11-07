@@ -1,6 +1,6 @@
 # React Server Side Rendering Example
 
-<div align="center">
+<div align="left">
   <a href="https://travis-ci.org/maximten/ssr">
     <img src="https://travis-ci.org/maximten/ssr.svg?branch=master" alt="Build Status"/>
   </a>
