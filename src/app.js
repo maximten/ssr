@@ -9,7 +9,8 @@ import Counter from './containers/Counter';
 import AppContainer from './containers/AppContainer';
 import PostsContainer from './containers/PostsContainer';
 import PostContainer from './containers/PostContainer';
-import AuthContainer from './containers/AuthContainer';
+import LoginContainer from './containers/LoginContainer';
+import RegisterContainer from './containers/RegisterContainer';
 import Info from './components/Info';
 
 export default class Main extends Component {
@@ -28,7 +29,8 @@ export default class Main extends Component {
             <Switch>
               <Route exact path="/" component={() => <AppContainer><PostsContainer/></AppContainer>} />
               <Route exact path="/posts/:slug" component={({match : { params : { slug }}}) => <AppContainer><PostContainer slug={slug}/></AppContainer>} />
-              <Route exact path="/auth/" component={() => <AppContainer><AuthContainer/></AppContainer>} />
+              <Route exact path="/login/" component={() => <AppContainer><LoginContainer/></AppContainer>} />
+              <Route exact path="/register/" component={() => <AppContainer><RegisterContainer/></AppContainer>} />
             </Switch>
           </div>
         </Router>

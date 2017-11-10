@@ -18,37 +18,43 @@ export default class RegisterForm extends Component {
       return classNames('form-control', { 'is-invalid': registerError && registerError.message[key] });
     });
     return (
-      <div className="card">
-        <div className="card-body">
-          <h2>Sign up</h2>
-          <form onSubmit={register}>
-            <div className="form-group">
-              <label>Login</label>
-              <input name="login" type="text" className={classes.login} placeholder="username"/>
-              <div className="invalid-feedback">
-                {registerError && registerError.message.login}
+      <div className="container">
+        <div className="row">
+          <div className="col-md-6 offset-md-3">
+            <div className="card">
+              <div className="card-body">
+                <h2>Sign up</h2>
+                <form onSubmit={register}>
+                  <div className="form-group">
+                    <label>Login</label>
+                    <input name="login" type="text" className={classes.login} placeholder="username"/>
+                    <div className="invalid-feedback">
+                      {registerError && registerError.message.login}
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label>Email address</label>
+                    <input name="email" type="email" className={classes.email} placeholder="name@example.com"/>
+                    <div className="invalid-feedback">
+                      {registerError && registerError.message.email}
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label>Password</label>
+                    <input name="password" type="password" className={classes.password}/>
+                    <div className="invalid-feedback">
+                      {registerError && registerError.message.password}
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    <label>Avatar</label>
+                    <input name="avatar" type="file" className="form-control-file"/>
+                  </div>
+                  <button type="submit" className="btn btn-primary">Sign up</button>
+                </form>
               </div>
             </div>
-            <div className="form-group">
-              <label>Email address</label>
-              <input name="email" type="email" className={classes.email} placeholder="name@example.com"/>
-              <div className="invalid-feedback">
-                {registerError && registerError.message.email}
-              </div>
-            </div>
-            <div className="form-group">
-              <label>Password</label>
-              <input name="password" type="password" className={classes.password}/>
-              <div className="invalid-feedback">
-                {registerError && registerError.message.password}
-              </div>
-            </div>
-            <div className="form-group">
-              <label>Avatar</label>
-              <input name="avatar" type="file" className="form-control-file"/>
-            </div>
-            <button type="submit" className="btn btn-primary">Sign up</button>
-          </form>
+          </div>
         </div>
       </div>
     );

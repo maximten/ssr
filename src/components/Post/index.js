@@ -9,9 +9,18 @@ export default class Post extends Component {
     return (
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
-            <h1>{post.title}</h1>
-            <p>{post.text}</p>
+          <div className="col-md-8 offset-md-2">
+            <div className="card">
+              <div className="card-body">
+                <div className="card-title">
+                  <h1>{post.title}</h1>
+                </div>
+                <div className="card-text">
+                  <p>{post.text}</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>

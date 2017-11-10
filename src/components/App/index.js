@@ -39,12 +39,19 @@ export default class App extends Component {
             </span>
           }
           {
-            ! user && 
-            <span className="navbar-brand">
-              <NavLink className="btn btn-primary" to="/auth/">
-                Sign in
-              </NavLink>
-            </span>
+            ! user &&
+            <span> 
+              <span className="navbar-brand">
+                <NavLink className="nav-link" to="/login/">
+                  Sign in
+                </NavLink>
+              </span>
+              <span className="navbar-brand">
+                <NavLink className="nav-link" to="/register/">
+                  Sign up
+                </NavLink>
+              </span>
+            </span> 
           }
         </nav>
         <div style={mainContainerStyle}>
