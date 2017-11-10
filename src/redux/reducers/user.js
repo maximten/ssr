@@ -3,7 +3,8 @@ import Types from '../constants/types';
 const initialState = {
   user: null,
   loading: false,
-  error: null
+  registerError: null,
+  loginError: null,
 };
 
 const user = (state = initialState, action) => {
@@ -18,12 +19,12 @@ const user = (state = initialState, action) => {
         ...state,
         user: action.user,
         loading: false,
-        error: null
+        registerError: null
       };
     case Types.USER_REGISTER.FAILURE:
       return {
         ...state,
-        error: action.error,
+        registerError: action.error,
         loading: false
       };
     case Types.USER_LOGIN.REQUEST:
@@ -36,12 +37,12 @@ const user = (state = initialState, action) => {
         ...state,
         user: action.user,
         loading: false,
-        error: null
+        loginError: null
       };
     case Types.USER_LOGIN.FAILURE:
       return {
         ...state,
-        error: action.error,
+        loginError: action.error,
         loading: false
       };
     default:

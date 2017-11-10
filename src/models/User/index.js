@@ -4,13 +4,15 @@ import crypto from 'crypto';
 const UserSchema = new mongoose.Schema({
   login: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   email: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
-  hashed_password: {
+  password: {
     type: String,
     required: true
   },
@@ -27,7 +29,7 @@ UserSchema.statics.hash = function (value) {
 };
 
 UserSchema.methods.authenticate = function (password) {
-  return this.hashed_password === this.model('User').hash(password);
+  return this.password === this.model('User').hash(password);
 };
 
 export default mongoose.model('User', UserSchema); 

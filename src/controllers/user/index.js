@@ -1,13 +1,14 @@
 import User from '../../models/User';
 import streamToPromise from 'stream-to-promise';
 import fs from 'fs';
+import _ from 'lodash';
 
 function register(req, res, next) {
   let newPath;
-  const { login, email, password } = req.body;
+  let { login, email, password } = req.body;
   const { avatar } = req.files;
-  const hashed_password = User.hash(password);
-  const model = new User({ login, email, hashed_password });
+  password = password ? User.hash(password) : null;
+  const model = new User({ login, email, password });
   model.save()
   .then((item) => {
     const extenstion = avatar.path.split('.').pop();
@@ -26,7 +27,14 @@ function register(req, res, next) {
     res.json({ login, email, avatar });
   })
   .catch((e) => {
-    next(e);
+    const message = e.code === 11000 ?
+    { login : "login or email already taken" } :
+    _.mapValues(e.errors, (item => item.kind)); 
+    const error = {
+      status: 400,
+      message: message
+    };
+    next(error);
   });
 }
 
@@ -43,9 +51,8 @@ function login(req, res, next) {
     } else {
       throw {
         status: 400,
-        type: "login",
         message: {
-          common: "Login or password incorrect"
+          login: "Login or password incorrect"
         }
       };
     } 
