@@ -48,6 +48,9 @@ app.use(session({
 
 app.use(express.static('public'));
 app.use('/api/v1', routes);
+app.use((err, req, res, next) => {
+  res.status(err.status).send(JSON.stringify(err));
+});
 
 app.get('/*', (req, res) => {
   getInitialState(req).then((initialState) => {

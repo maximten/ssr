@@ -36,11 +36,19 @@ function login(req, res, next) {
   .then((item) => {
     if (item && item.authenticate(password)) {
       req.session.user_id = item._id;
+      req.session.save(() => {
+        const { login, email, avatar } = item;
+        res.json({ login, email, avatar });
+      });
+    } else {
+      throw {
+        status: 400,
+        type: "login",
+        message: {
+          common: "Login or password incorrect"
+        }
+      };
     } 
-    req.session.save(() => {
-      const { login, email, avatar } = item;
-      res.json({ login, email, avatar });
-    });
   })
   .catch((e) => {
     next(e);

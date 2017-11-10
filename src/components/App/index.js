@@ -41,7 +41,7 @@ export default class App extends Component {
           {
             ! user && 
             <span className="navbar-brand">
-              <NavLink className="btn btn-outline-success" to="/auth/">
+              <NavLink className="btn btn-primary" to="/auth/">
                 Sign in
               </NavLink>
             </span>

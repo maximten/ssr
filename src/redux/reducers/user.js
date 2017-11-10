@@ -17,7 +17,8 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         user: action.user,
-        loading: false
+        loading: false,
+        error: null
       };
     case Types.USER_REGISTER.FAILURE:
       return {
@@ -34,7 +35,8 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         user: action.user,
-        loading: false
+        loading: false,
+        error: null
       };
     case Types.USER_LOGIN.FAILURE:
       return {

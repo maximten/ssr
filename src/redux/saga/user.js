@@ -7,8 +7,8 @@ import * as api from '../api/user';
 
 function* register(action) {
   const { formData } = action;
-  const user = yield call(api.register, formData);
   try {
+    const user = yield call(api.register, formData);
     yield put({ type: Types.USER_REGISTER.SUCCESS, user });
   } catch (error) {
     yield put({ type: Types.USER_REGISTER.FAILURE, error });
@@ -17,8 +17,8 @@ function* register(action) {
 
 function* login(action) {
   const { formData } = action;
-  const user = yield call(api.login, formData);
   try {
+    const user = yield call(api.login, formData);
     yield put({ type: Types.USER_LOGIN.SUCCESS, user });
   } catch (error) {
     yield put({ type: Types.USER_LOGIN.FAILURE, error });
