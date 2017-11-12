@@ -11,12 +11,15 @@ import bodyParser from 'body-parser';
 import multipartMiddleware from 'connect-multiparty';
 import Helmet from 'react-helmet';
 import session from 'express-session';
+import MongoStoreBuilder from 'connect-mongo';
+import cookieParser from 'cookie-parser';
 import webpackConfig from '../webpack.dev.config.js';
 import App from './app.js';
 import routes from './routes';
 import config from './config';
 import getInitialState from './state';
 
+const MongoStore = new MongoStoreBuilder(session); 
 const app = express();
 const html = fs.readFileSync(__dirname + '/../public/template.html', 'utf8');
 const appToken = fs.readFileSync(__dirname + '/../app-token.txt', 'utf8');
@@ -39,11 +42,16 @@ if (process.env.NODE_ENV != 'production') {
 app.use(multipartMiddleware());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(session({
   secret: appToken,
-  resave: false,
+  resave: true,
   saveUninitialized: true,
-  cookie: { secure: false }
+  cookie: { 
+    secure: false, 
+    httpOnly: false
+  },
+  store: new MongoStore({ mongooseConnection: mongoose.connection })
 }));
 
 app.use(express.static('public'));
@@ -58,6 +66,7 @@ app.get('/*', (req, res) => {
     const helmet = Helmet.renderStatic();
     const finalHtml = html
     .replace('<!--root-->', appString)
+    .replace('<!--state-->', JSON.stringify(initialState).replace(/</g, '\\u003c'))
     .replace('<!--head-->', helmet.meta.toString() + helmet.link.toString() + helmet.title.toString());
     res.send(finalHtml);
   });

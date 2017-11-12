@@ -4,7 +4,8 @@ export const register = (formData) => {
   let status;
   return fetch(`/api/v1/user/register/`, {
     method: 'post',
-    body: formData
+    body: formData,
+    credentials: 'same-origin'
   })
   .then(response => {
     status = response.status;
@@ -23,7 +24,8 @@ export const login = (formData) => {
   let status;
   return fetch(`/api/v1/user/login`, {
     method: 'post',
-    body: formData
+    body: formData,
+    credentials: 'same-origin'
   })
   .then(response => {
     status = response.status;

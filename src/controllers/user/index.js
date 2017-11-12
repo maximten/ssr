@@ -40,11 +40,11 @@ function register(req, res, next) {
 
 function login(req, res, next) {
   const { login, password } = req.body;
-  User.findOne({ login: login})
+  User.findOne({ login: login })
   .then((item) => {
     if (item && item.authenticate(password)) {
       req.session.user_id = item._id;
-      req.session.save(() => {
+      req.session.save((err) => {
         const { login, email, avatar } = item;
         res.json({ login, email, avatar });
       });
