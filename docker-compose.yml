@@ -1,0 +1,16 @@
+version: "2"
+services: 
+  app:
+    build: 
+      context: .
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    environment:
+      - MONGO_HOST=mongo
+      - MONGO_PORT=27017
+    links:
+      - mongo
+  mongo:
+    image: "mongo:latest"
