@@ -19,7 +19,12 @@ const Types = {
     REQUEST: 'USER_LOGIN_REQUEST', 
     SUCCESS: 'USER_LOGIN_SUCCESS', 
     FAILURE: 'USER_LOGIN_FAILURE', 
-  }
+  },
+  USER_LOGOUT: {
+    REQUEST: 'USER_LOGOUT_REQUEST', 
+    SUCCESS: 'USER_LOGOUT_SUCCESS', 
+    FAILURE: 'USER_LOGOUT_FAILURE', 
+  },
 }
 
 export default Types;

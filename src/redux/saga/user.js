@@ -25,9 +25,19 @@ function* login(action) {
   }
 }
 
+function* logout() {
+  try {
+    const user = yield call(api.logout);
+    yield put({ type: Types.USER_LOGOUT.SUCCESS });
+  } catch (error) {
+    yield put({ type: Types.USER_LOGOUT.FAILURE, error });
+  }
+}
+
 function* watchStatements() {
   yield takeEvery(Types.USER_REGISTER.REQUEST, register);
   yield takeEvery(Types.USER_LOGIN.REQUEST, login);
+  yield takeEvery(Types.USER_LOGOUT.REQUEST, logout);
 }
 
 export default function* statementsSaga() {

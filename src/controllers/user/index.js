@@ -66,6 +66,11 @@ function login(req, res, next) {
   });
 }
 
+function logout(req, res, next) {
+  req.session.destroy();
+  res.json("ok");
+}
+
 function self(req, res, next) {
   User.findOne({ _id: req.session.user_id})
   .then((item) => {
@@ -81,6 +86,6 @@ function self(req, res, next) {
   });
 }
 
-const UserController = { self, register, login }
+const UserController = { self, register, login, logout }
 
 export default UserController;

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import App from '../../components/App';
+import { logout } from '../../redux/actions/user';
 
 class AppContainer extends Component {
   constructor(props) {
@@ -18,6 +19,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  logout: () => {
+    dispatch(logout());
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AppContainer);

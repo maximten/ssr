@@ -7,6 +7,7 @@ const initialState = {
   loginSuccess: null,
   registerError: null,
   loginError: null,
+  logoutError: null,
 };
 
 const user = (state = initialState, action) => {
@@ -47,6 +48,24 @@ const user = (state = initialState, action) => {
       return {
         ...state,
         loginError: action.error,
+        loading: false
+      };
+    case Types.USER_LOGOUT.REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case Types.USER_LOGOUT.SUCCESS:
+      return {
+        ...state,
+        user: null,
+        logoutError: null,
+        loading: false
+      };
+    case Types.USER_LOGOUT.FAILURE:
+      return {
+        ...state,
+        logoutError: action.error,
         loading: false
       };
     default:
