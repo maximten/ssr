@@ -23,8 +23,11 @@ function register(req, res, next) {
     return model.save();
   })
   .then(() => {
-    const { login, email, avatar } = model;
-    res.json({ login, email, avatar });
+    req.session.user_id = model._id;
+    req.session.save((err) => {
+      const { login, email, avatar } = model;
+      res.json({ login, email, avatar });
+    });
   })
   .catch((e) => {
     const message = e.code === 11000 ?
@@ -46,6 +49,7 @@ function login(req, res, next) {
       req.session.user_id = item._id;
       req.session.save((err) => {
         const { login, email, avatar } = item;
+        console.log(avatar);
         res.json({ login, email, avatar });
       });
     } else {
