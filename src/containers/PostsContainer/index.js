@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 
 import Posts from '../../components/Posts';
 import { fetchPosts } from '../../redux/actions/posts';
+import { posts as postsConstants } from '../../constants';
 
 class PostsContainer extends Component {
   constructor(props) {
@@ -13,6 +14,10 @@ class PostsContainer extends Component {
     const { fetchPosts, posts: { limit, skip } } = this.props;
     fetchPosts(limit, skip);
   }
+  fetchMorePosts = () => {
+    const { fetchPosts, posts: { limit, skip } } = this.props;
+    fetchPosts(limit, skip + postsConstants.size);
+  }
   render() {
     const { posts: { items, limit, skip , loading } } = this.props; 
     return (
@@ -20,7 +25,7 @@ class PostsContainer extends Component {
         <Helmet>
           <title>Posts</title>
         </Helmet>
-        <Posts {...this.props}/>
+        <Posts {...this.props} fetchMorePosts={this.fetchMorePosts}/>
       </div>
     );
   }

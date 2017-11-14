@@ -49,7 +49,6 @@ function login(req, res, next) {
       req.session.user_id = item._id;
       req.session.save((err) => {
         const { login, email, avatar } = item;
-        console.log(avatar);
         res.json({ login, email, avatar });
       });
     } else {

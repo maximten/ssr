@@ -1,9 +1,10 @@
 import Types from '../constants/types';
+import { posts as postsConstants } from '../../constants';
 
 const initialState = {
   items: [],
   loading: false,
-  limit: 50,
+  limit: postsConstants.pageSize,
   skip: 0,
   error: null
 };
@@ -20,7 +21,7 @@ const posts = (state = initialState, action) => {
     case Types.FETCH_POSTS.SUCCESS:
       return {
         ...state,
-        items: action.items,
+        items: state.items.concat(action.items),
         loading: false
       };
     case Types.FETCH_POSTS.FAILURE:

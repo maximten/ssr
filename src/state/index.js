@@ -1,5 +1,6 @@
 import Post from '../models/Post';
 import User from '../models/User';
+import { posts as postsConstants } from '../constants';
 
 const getInitialState = (req) => {
   const promises = [];
@@ -11,8 +12,8 @@ const getInitialState = (req) => {
     promises.push(promise);
   }
   if (req.path == '/') {
-    const promise = Post.list({limit: 50, skip: 0}).then((items) => {
-      return { posts: items };
+    const promise = Post.list({limit: postsConstants.pageSize, skip: 0}).then((items) => {
+      return { posts: { items } };
     });
     promises.push(promise);
   } 
