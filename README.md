@@ -17,7 +17,7 @@ Run development server:
 ```shell
 npm run start
 ```
-Run prodaction server:
+Run production server:
 ```shell
 npm run serve
 ```
