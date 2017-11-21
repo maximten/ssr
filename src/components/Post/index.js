@@ -4,10 +4,12 @@ import Helmet from 'react-helmet';
 
 export default class Post extends Component {
   render() {
-    const { posts: { items, limit, skip , loading }, slug } = this.props;
-    const post = items.filter((item) => { return item.slug == slug}).pop();
+    const { posts: { items, limit, skip, loading }, post } = this.props;
     return (
       <div className="container">
+        <Helmet>
+          <title>{post.title}</title>
+        </Helmet>
         <div className="row">
           <div className="col-md-8 offset-md-2">
             <div className="card">

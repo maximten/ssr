@@ -16,16 +16,13 @@ class PostContainer extends Component {
   }
   render() {
     const { posts: { items, limit, skip , loading }, slug } = this.props;
-    const post = items.filter((item) => { return item.slug == slug}).pop();
+    const post = items[slug];
     return (
       <div>
         {
           post && 
           <div>
-            <Helmet>
-              <title>{post.title}</title>
-            </Helmet>
-            <Post {...this.props}/>
+            <Post {...this.props} post={post}/>
           </div>
         }
       </div>

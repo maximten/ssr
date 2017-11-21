@@ -2,7 +2,7 @@ import Types from '../constants/types';
 import { posts as postsConstants } from '../../constants';
 
 export const initialState = {
-  items: [],
+  items: {},
   loading: false,
   limit: postsConstants.pageSize,
   skip: 0,
@@ -21,7 +21,10 @@ const posts = (state = initialState, action) => {
     case Types.FETCH_POSTS.SUCCESS:
       return {
         ...state,
-        items: state.items.concat(action.items),
+        items: Object.assign(state.items, action.items.reduce((carry, item) => {
+          carry[item.slug] = item;
+          return carry;
+        }, {})),
         loading: false
       };
     case Types.FETCH_POSTS.FAILURE:
@@ -38,7 +41,10 @@ const posts = (state = initialState, action) => {
     case Types.FETCH_POST.SUCCESS:
       return {
         ...state,
-        items: state.items.concat(action.item),
+        items: {
+          ...state.items,
+          [action.item.slug]: action.item
+        },
         loading: false
       };
     case Types.FETCH_POST.FAILURE:

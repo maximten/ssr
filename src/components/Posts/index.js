@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import Helmet from 'react-helmet';
 import Waypoint from 'react-waypoint';
+import _ from 'lodash';
 
 const cardStyle = {
   minHeight: '300px',
@@ -14,13 +15,13 @@ export default class Posts extends Component {
     fetchMorePosts();
   }
   render() {
-    const { posts: { items, limit, skip , loading } } = this.props; 
+    const { posts: { items, limit, skip , loading } } = this.props;
     return (
       <div className="container">
         <div className="row">
           { 
             items &&
-            items.map((item, key) => {
+            _.map(items, (item, key) => {
               return (
                 <div key={key} className="col-md-4">
                   <div className="card" style={cardStyle}>

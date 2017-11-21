@@ -15,13 +15,20 @@ const getInitialState = (req) => {
   }
   if (req.path == '/') {
     const promise = Post.list({limit: postsConstants.pageSize, skip: 0}).then((items) => {
-    return { posts: { ...postsState, items } };
+      return {
+        posts: {
+          ...postsState, items: items.reduce((carry, item) => {
+            carry[item.slug] = item;
+            return carry;
+          }, {}) 
+        } 
+      };
     });
     promises.push(promise);
   }
   if (req.path.match(/^\/posts\/.+/g)) {
     const promise = Post.getBySlug(req.path.replace(/\/posts\//g, ''))
-      .then(item => ({ posts: { ...postsState, items: [item] } }));
+      .then(item => ({ posts: { ...postsState, items: { [item.slug]: item } } }));
     promises.push(promise);
   }
   return Promise.all(promises)
