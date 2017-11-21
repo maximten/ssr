@@ -5,10 +5,8 @@ dist
 yarn.lock
 npm-debug.log
 package-lock.json
-public/bundle.js
-public/css
-public/fonts
-public/store
+public/*
+!public/template.html
 src/scripts/store
 src/scripts/test.js
 app-token.txt

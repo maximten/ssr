@@ -23,8 +23,11 @@ function register(req, res, next) {
     return model.save();
   })
   .then(() => {
-    const { login, email, avatar } = model;
-    res.json({ login, email, avatar });
+    req.session.user_id = model._id;
+    req.session.save((err) => {
+      const { login, email, avatar } = model;
+      res.json({ login, email, avatar });
+    });
   })
   .catch((e) => {
     const message = e.code === 11000 ?
@@ -62,6 +65,11 @@ function login(req, res, next) {
   });
 }
 
+function logout(req, res, next) {
+  req.session.destroy();
+  res.json("ok");
+}
+
 function self(req, res, next) {
   User.findOne({ _id: req.session.user_id})
   .then((item) => {
@@ -77,6 +85,6 @@ function self(req, res, next) {
   });
 }
 
-const UserController = { self, register, login }
+const UserController = { self, register, login, logout }
 
 export default UserController;

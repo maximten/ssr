@@ -39,3 +39,22 @@ export const login = (formData) => {
     }
   });
 }
+
+export const logout = () => {
+  let status;
+  return fetch(`/api/v1/user/logout`, {
+    method: 'get',
+    credentials: 'same-origin'
+  })
+  .then(response => {
+    status = response.status;
+    return response.json();
+  })
+  .then(json => {
+    if (status == 200) {
+      return json;
+    } else {
+      throw json;
+    }
+  });
+}

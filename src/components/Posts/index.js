@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom'
 import Helmet from 'react-helmet';
+import Waypoint from 'react-waypoint';
 
 const cardStyle = {
   minHeight: '300px',
@@ -8,6 +9,20 @@ const cardStyle = {
 };
 
 export default class Posts extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bottomReachedCount: 0
+    };
+  }
+  handleScrollToBottom = () => {
+    const { bottomReachedCount } = this.state;
+    const { fetchMorePosts } = this.props;
+    if (bottomReachedCount > 0) {
+      fetchMorePosts();
+    }
+    this.setState({bottomReachedCount: bottomReachedCount + 1});
+  }
   render() {
     const { posts: { items, limit, skip , loading } } = this.props; 
     return (
@@ -33,6 +48,7 @@ export default class Posts extends Component {
             }) 
           }
         </div>
+        <Waypoint onEnter={this.handleScrollToBottom}/>
       </div>
     );
   }

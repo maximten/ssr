@@ -9,3 +9,7 @@ export const login = (formData) => ({
   type: Types.USER_LOGIN.REQUEST,
   formData
 });
+
+export const logout = () => ({
+  type: Types.USER_LOGOUT.REQUEST
+});
