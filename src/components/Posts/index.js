@@ -9,19 +9,9 @@ const cardStyle = {
 };
 
 export default class Posts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      bottomReachedCount: 0
-    };
-  }
   handleScrollToBottom = () => {
-    const { bottomReachedCount } = this.state;
     const { fetchMorePosts } = this.props;
-    if (bottomReachedCount > 0) {
-      fetchMorePosts();
-    }
-    this.setState({bottomReachedCount: bottomReachedCount + 1});
+    fetchMorePosts();
   }
   render() {
     const { posts: { items, limit, skip , loading } } = this.props; 

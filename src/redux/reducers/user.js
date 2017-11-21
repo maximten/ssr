@@ -1,6 +1,6 @@
 import Types from '../constants/types';
 
-const initialState = {
+export const initialState = {
   user: null,
   loading: false,
   registerSuccess: null,

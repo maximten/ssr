@@ -8,10 +8,9 @@ mongoose.connection.on('error', () => {
   throw new Error(`unable to connect to database: ${config.mongo.host}`);
 });
 
-let count = 100;
-
 Post.remove({}).then(() => {
-  const promises = [];
+  let count = 100;
+  const models = [];
   while (count--) {
     const model = new Post({
       title: faker.lorem.word(),
@@ -19,11 +18,18 @@ Post.remove({}).then(() => {
       text: faker.lorem.paragraphs(),
       slug: faker.lorem.slug(),
     });
-    promises.push(model.save());
+    models.push(model);
   }
-  Promise.all(promises).then((items) => {
-    console.log('done');
-    process.exit(0);
-  });
+  const resovle = () => {
+    if (models.length) {
+      models.shift().save().then((item) => {
+        console.log(item);
+        resovle();
+      });
+    } else {
+      process.exit(0);
+    }
+  };
+  resovle();
 });
 

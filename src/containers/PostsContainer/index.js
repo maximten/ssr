@@ -16,7 +16,7 @@ class PostsContainer extends Component {
   }
   fetchMorePosts = () => {
     const { fetchPosts, posts: { limit, skip } } = this.props;
-    fetchPosts(limit, skip + postsConstants.size);
+    fetchPosts(limit, skip + postsConstants.pageSize);
   }
   render() {
     const { posts: { items, limit, skip , loading } } = this.props; 

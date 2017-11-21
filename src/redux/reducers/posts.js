@@ -1,7 +1,7 @@
 import Types from '../constants/types';
 import { posts as postsConstants } from '../../constants';
 
-const initialState = {
+export const initialState = {
   items: [],
   loading: false,
   limit: postsConstants.pageSize,
