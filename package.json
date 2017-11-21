@@ -8,13 +8,15 @@
     "server_debug": "nodemon src/ --exec 'npm run start'",
     "build": "babel src/ -d dist/ && webpack -p --config webpack.prod.config.js",
     "serve": "npm run build && NODE_SIDE=server NODE_ENV=production node dist/server.js",
-    "faker": "babel-node src/scripts/fake.js"
+    "faker": "babel-node src/scripts/fake.js",
+    "lint": "./node_modules/.bin/eslint src/"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.2",
     "babel-loader": "^7.1.2",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -29,6 +31,11 @@
     "cookie-parser": "^1.4.3",
     "copy-webpack-plugin": "^4.2.0",
     "cross-env": "^5.1.1",
+    "eslint": "^4.11.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-react": "^7.4.0",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "faker": "^4.1.0",

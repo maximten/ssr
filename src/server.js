@@ -13,29 +13,29 @@ import Helmet from 'react-helmet';
 import session from 'express-session';
 import MongoStoreBuilder from 'connect-mongo';
 import cookieParser from 'cookie-parser';
-import webpackConfig from '../webpack.dev.config.js';
-import App from './app.js';
+import webpackConfig from '../webpack.dev.config';
+import App from './app';
 import routes from './routes';
-import config from './config';
+import { mongo } from './config';
 import getInitialState from './state';
 
-const MongoStore = new MongoStoreBuilder(session); 
+const MongoStore = new MongoStoreBuilder(session);
 const app = express();
-const html = fs.readFileSync(__dirname + '/../public/template.html', 'utf8');
-const appToken = fs.readFileSync(__dirname + '/../app-token.txt', 'utf8');
+const html = fs.readFileSync(`${__dirname}/../public/template.html`, 'utf8');
+const appToken = fs.readFileSync(`${__dirname}/../app-token.txt`, 'utf8');
 const port = process.env.NODE_PORT || 3000;
 
-mongoose.connect(config.mongo.host, { server: { socketOptions: { keepAlive: 1 } } });
+mongoose.connect(mongo.host, { server: { socketOptions: { keepAlive: 1 } } });
 mongoose.connection.on('error', () => {
-  throw new Error(`unable to connect to database: ${config.mongo.host}`);
+  throw new Error(`unable to connect to database: ${mongo.host}`);
 });
 
-if (process.env.NODE_ENV != 'production') {
+if (process.env.NODE_ENV !== 'production') {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {
     noInfo: true,
-    publicPath: webpackConfig.output.publicPath
-  }));  
+    publicPath: webpackConfig.output.publicPath,
+  }));
   app.use(webpackHotMiddleware(compiler));
 }
 
@@ -47,11 +47,11 @@ app.use(session({
   secret: appToken,
   resave: true,
   saveUninitialized: true,
-  cookie: { 
-    secure: false, 
-    httpOnly: false
+  cookie: {
+    secure: false,
+    httpOnly: false,
   },
-  store: new MongoStore({ mongooseConnection: mongoose.connection })
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
 }));
 
 app.use(express.static('public'));
@@ -62,12 +62,16 @@ app.use((err, req, res, next) => {
 
 app.get('/*', (req, res) => {
   getInitialState(req).then((initialState) => {
-    const appString = renderToString(<App location={req.url} context={{}} initialState={initialState}/>);
+    const appString = renderToString(<App
+      location={req.url}
+      context={{}}
+      initialState={initialState}
+    />);
     const helmet = Helmet.renderStatic();
     const finalHtml = html
-    .replace('<!--root-->', appString)
-    .replace('<!--state-->', JSON.stringify(initialState).replace(/</g, '\\u003c'))
-    .replace('<!--head-->', helmet.meta.toString() + helmet.link.toString() + helmet.title.toString());
+      .replace('<!--root-->', appString)
+      .replace('<!--state-->', JSON.stringify(initialState).replace(/</g, '\\u003c'))
+      .replace('<!--head-->', helmet.meta.toString() + helmet.link.toString() + helmet.title.toString());
     res.send(finalHtml);
   });
 });

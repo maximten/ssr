@@ -10,23 +10,18 @@ const getInitialState = (req) => {
     });
     promises.push(promise);
   }
-  if (req.path == '/') {
-    const promise = Post.list({limit: 50, skip: 0}).then((items) => {
-      return { posts: items };
-    });
-    promises.push(promise);
-  } 
-  if (req.path.match(/^\/posts\/.+/g)) {
-    const promise = Post.getBySlug(req.path.replace(/\/posts\//g, '')).then((item) => {
-      return { posts: { items: [item] } };
-    });
+  if (req.path === '/') {
+    const promise = Post.list({ limit: 50, skip: 0 })
+      .then(items => ({ posts: items }));
     promises.push(promise);
   }
-  return Promise.all(promises).then((states) => {
-    return states.reduce((carry, state) => {
-      return Object.assign(carry, state);
-    }, {});
-  });
+  if (req.path.match(/^\/posts\/.+/g)) {
+    const promise = Post.getBySlug(req.path.replace(/\/posts\//g, ''))
+      .then(item => ({ posts: { items: [item] } }));
+    promises.push(promise);
+  }
+  return Promise.all(promises)
+    .then(states => states.reduce((carry, state) => Object.assign(carry, state), {}));
 };
 
 export default getInitialState;
