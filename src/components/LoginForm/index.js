@@ -21,15 +21,15 @@ export default class LoginForm extends Component {
                 <h2>Sign in</h2>
                 <form onSubmit={login}>
                   <div className="form-group">
-                    <label>Email</label>
-                    <input name="email" type="text" className={loginClass} placeholder="john@doe.com"/>
+                    <label htmlFor="email">Email</label>
+                    <input id="email" name="email" type="text" className={loginClass} placeholder="john@doe.com" />
                     <div className="invalid-feedback">
                       { loginError && loginError.message.login }
                     </div>
                   </div>
                   <div className="form-group">
-                    <label>Password</label>
-                    <input name="password" type="password" className={ loginClass }/>
+                    <label htmlFor="password">Password</label>
+                    <input id="password" name="password" type="password" className={loginClass} />
                   </div>
                   <button type="submit" className="btn btn-primary">Sign up</button>
                 </form>

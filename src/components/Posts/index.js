@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import Waypoint from 'react-waypoint';
 import _ from 'lodash';
 
 const cardStyle = {
   minHeight: '300px',
-  marginBottom: '25px'
+  marginBottom: '25px',
 };
 
 export default class Posts extends Component {
@@ -15,31 +15,33 @@ export default class Posts extends Component {
     fetchMorePosts();
   }
   render() {
-    const { posts: { items, limit, skip , loading } } = this.props;
+    const {
+      posts: {
+        items, limit, skip, loading,
+      },
+    } = this.props;
     return (
       <div className="container">
         <div className="row">
-          { 
+          {
             items &&
-            _.map(items, (item, key) => {
-              return (
-                <div key={key} className="col-md-4">
-                  <div className="card" style={cardStyle}>
-                    <div className="card-body">
-                      <div className="card-title">
-                        <NavLink to={`/posts/${item.slug}`}><h2>{item.title}</h2></NavLink>
-                      </div>
-                      <div className="card-text">
-                        <p>{item.preview}</p>
-                      </div>
+            _.map(items, (item, key) => (
+              <div key={key} className="col-md-4">
+                <div className="card" style={cardStyle}>
+                  <div className="card-body">
+                    <div className="card-title">
+                      <NavLink to={`/posts/${item.slug}`}><h2>{item.title}</h2></NavLink>
+                    </div>
+                    <div className="card-text">
+                      <p>{item.preview}</p>
                     </div>
                   </div>
                 </div>
-              );
-            }) 
+              </div>
+              ))
           }
         </div>
-        <Waypoint onEnter={this.handleScrollToBottom}/>
+        <Waypoint onEnter={this.handleScrollToBottom} />
       </div>
     );
   }

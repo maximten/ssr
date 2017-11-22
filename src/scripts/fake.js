@@ -1,11 +1,11 @@
 import mongoose from 'mongoose';
 import faker from 'faker';
 import Post from '../models/Post';
-import config from '../config';
+import { mongo } from '../config';
 
-mongoose.connect(config.mongo.host, { server: { socketOptions: { keepAlive: 1 } } });
+mongoose.connect(mongo.host, { server: { socketOptions: { keepAlive: 1 } } });
 mongoose.connection.on('error', () => {
-  throw new Error(`unable to connect to database: ${config.mongo.host}`);
+  throw new Error(`unable to connect to database: ${mongo.host}`);
 });
 
 Post.remove({}).then(() => {

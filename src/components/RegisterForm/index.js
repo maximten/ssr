@@ -12,11 +12,9 @@ export default class RegisterForm extends Component {
   render() {
     const { register } = this;
     const { user: { user, registerError } } = this.props;
-    const classes = _.mapValues({ 
+    const classes = _.mapValues({
       email: '', password: '',
-    }, (item, key) => {
-      return classNames('form-control', { 'is-invalid': registerError && registerError.message[key] });
-    });
+    }, (item, key) => classNames('form-control', { 'is-invalid': registerError && registerError.message[key] }));
     return (
       <div className="container">
         <div className="row">
@@ -26,22 +24,22 @@ export default class RegisterForm extends Component {
                 <h2>Sign up</h2>
                 <form onSubmit={register}>
                   <div className="form-group">
-                    <label>Email</label>
-                    <input name="email" type="email" className={classes.email} placeholder="john@doe.com"/>
+                    <label htmlFor="email">Email</label>
+                    <input id="email" name="email" type="email" className={classes.email} placeholder="john@doe.com" />
                     <div className="invalid-feedback">
                       {registerError && registerError.message.email}
                     </div>
                   </div>
                   <div className="form-group">
-                    <label>Password</label>
-                    <input name="password" type="password" className={classes.password}/>
+                    <label htmlFor="password">Password</label>
+                    <input id="password" name="password" type="password" className={classes.password} />
                     <div className="invalid-feedback">
                       {registerError && registerError.message.password}
                     </div>
                   </div>
                   <div className="form-group">
-                    <label>Avatar</label>
-                    <input name="avatar" type="file" className="form-control-file"/>
+                    <label htmlFor="avatar">Avatar</label>
+                    <input id="avatar" name="avatar" type="file" className="form-control-file" />
                   </div>
                   <button type="submit" className="btn btn-primary">Sign up</button>
                 </form>

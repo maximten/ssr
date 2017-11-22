@@ -6,7 +6,7 @@ export const initialState = {
   loading: false,
   limit: postsConstants.pageSize,
   skip: 0,
-  error: null
+  error: null,
 };
 
 const posts = (state = initialState, action) => {
@@ -16,7 +16,7 @@ const posts = (state = initialState, action) => {
         ...state,
         limit: action.limit,
         skip: action.skip,
-        loading: true
+        loading: true,
       };
     case Types.FETCH_POSTS.SUCCESS:
       return {
@@ -25,39 +25,39 @@ const posts = (state = initialState, action) => {
           carry[item.slug] = item;
           return carry;
         }, {})),
-        loading: false
+        loading: false,
       };
     case Types.FETCH_POSTS.FAILURE:
       return {
         ...state,
         error: action.error,
-        loading: false
+        loading: false,
       };
     case Types.FETCH_POST.REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case Types.FETCH_POST.SUCCESS:
       return {
         ...state,
         items: {
           ...state.items,
-          [action.item.slug]: action.item
+          [action.item.slug]: action.item,
         },
-        loading: false
+        loading: false,
       };
     case Types.FETCH_POST.FAILURE:
       return {
         ...state,
         error: action.error,
-        loading: false
+        loading: false,
       };
     default:
       return {
-        ...state
+        ...state,
       };
-  };
+  }
 };
 
 export default posts;

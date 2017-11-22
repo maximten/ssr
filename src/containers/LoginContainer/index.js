@@ -12,7 +12,7 @@ class LoginContainer extends Component {
         <Helmet>
           <title>Sign in</title>
         </Helmet>
-        <LoginForm {...this.props}/>
+        <LoginForm {...this.props} />
       </div>
     );
   }

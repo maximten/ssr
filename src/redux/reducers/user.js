@@ -15,7 +15,7 @@ const user = (state = initialState, action) => {
     case Types.USER_REGISTER.REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case Types.USER_REGISTER.SUCCESS:
       return {
@@ -23,18 +23,18 @@ const user = (state = initialState, action) => {
         user: action.user,
         loading: false,
         registerSuccess: true,
-        registerError: null
+        registerError: null,
       };
     case Types.USER_REGISTER.FAILURE:
       return {
         ...state,
         registerError: action.error,
-        loading: false
+        loading: false,
       };
     case Types.USER_LOGIN.REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case Types.USER_LOGIN.SUCCESS:
       return {
@@ -42,37 +42,37 @@ const user = (state = initialState, action) => {
         user: action.user,
         loading: false,
         loginSuccess: true,
-        loginError: null
+        loginError: null,
       };
     case Types.USER_LOGIN.FAILURE:
       return {
         ...state,
         loginError: action.error,
-        loading: false
+        loading: false,
       };
     case Types.USER_LOGOUT.REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case Types.USER_LOGOUT.SUCCESS:
       return {
         ...state,
         user: null,
         logoutError: null,
-        loading: false
+        loading: false,
       };
     case Types.USER_LOGOUT.FAILURE:
       return {
         ...state,
         logoutError: action.error,
-        loading: false
+        loading: false,
       };
     default:
       return {
-        ...state
+        ...state,
       };
-  };
+  }
 };
 
 export default user;

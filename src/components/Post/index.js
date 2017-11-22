@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 import Helmet from 'react-helmet';
 
 export default class Post extends Component {
   render() {
-    const { posts: { items, limit, skip, loading }, post } = this.props;
+    const {
+      posts: {
+        items, limit, skip, loading,
+      }, post,
+    } = this.props;
     return (
       <div className="container">
         <Helmet>

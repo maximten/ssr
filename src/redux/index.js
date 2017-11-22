@@ -6,24 +6,20 @@ import reducers from './reducers';
 import rootSaga from './saga';
 
 export default function configureStore(initialState) {
-    const sagaMiddleware = createSagaMiddleware();
-    let store;
-    if (initialState) {
-      store = createStore(
-          reducers,
-          initialState,
-          composeWithDevTools(
-              applyMiddleware(sagaMiddleware),
-          ),
-      );
-    } else {
-      store = createStore(
-          reducers,
-          composeWithDevTools(
-              applyMiddleware(sagaMiddleware),
-          ),
-      );
-    }
-    sagaMiddleware.run(rootSaga);
-    return store;
+  const sagaMiddleware = createSagaMiddleware();
+  let store;
+  if (initialState) {
+    store = createStore(
+      reducers,
+      initialState,
+      composeWithDevTools(applyMiddleware(sagaMiddleware)),
+    );
+  } else {
+    store = createStore(
+      reducers,
+      composeWithDevTools(applyMiddleware(sagaMiddleware)),
+    );
+  }
+  sagaMiddleware.run(rootSaga);
+  return store;
 }

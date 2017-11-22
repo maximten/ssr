@@ -1,13 +1,12 @@
 import Types from '../constants/types';
 
-export const fetchPosts = (limit, skip) => {
-  return {
+export const fetchPosts = (limit, skip) => ({
   type: Types.FETCH_POSTS.REQUEST,
   limit,
-  skip
-}};
+  skip,
+});
 
-export const fetchPost = (slug) => ({
+export const fetchPost = slug => ({
   type: Types.FETCH_POST.REQUEST,
   slug,
 });

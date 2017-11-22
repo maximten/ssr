@@ -2,7 +2,7 @@ import Post from '../models/Post';
 import User from '../models/User';
 import { posts as postsConstants } from '../constants';
 import { initialState as postsState } from '../redux/reducers/posts';
-import { initialState as userState } from '../redux/reducers/posts';
+import { initialState as userState } from '../redux/reducers/user';
 
 const getInitialState = (req) => {
   const promises = [];
@@ -13,17 +13,16 @@ const getInitialState = (req) => {
     });
     promises.push(promise);
   }
-  if (req.path == '/') {
-    const promise = Post.list({limit: postsConstants.pageSize, skip: 0}).then((items) => {
-      return {
-        posts: {
-          ...postsState, items: items.reduce((carry, item) => {
-            carry[item.slug] = item;
-            return carry;
-          }, {}) 
-        } 
-      };
-    });
+  if (req.path === '/') {
+    const promise = Post.list({ limit: postsConstants.pageSize, skip: 0 }).then(items => ({
+      posts: {
+        ...postsState,
+        items: items.reduce((carry, item) => {
+          carry[item.slug] = item;
+          return carry;
+        }, {}),
+      },
+    }));
     promises.push(promise);
   }
   if (req.path.match(/^\/posts\/.+/g)) {

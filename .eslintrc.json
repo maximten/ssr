@@ -8,6 +8,19 @@
   ],
   "rules": {
     "no-unused-vars": 0,
+    "no-param-reassign": 0,
+    "no-console": 0,
+    "no-plusplus": 0,
+    "prefer-destructuring": 0,
+    "func-names": 0,
+    "no-underscore-dangle": 0,
+    "no-shadow": 0,
+    "react/prop-types": 0,
+    "import/prefer-default-export": 0,
     "react/jsx-filename-extension": 0
+  },
+  "globals": {
+    "window": true,
+    "document": true
   }
 }

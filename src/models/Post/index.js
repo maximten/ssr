@@ -3,12 +3,12 @@ import mongoose from 'mongoose';
 const PostSchema = new mongoose.Schema({
   title: {
     type: String,
-    required: true
+    required: true,
   },
   slug: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   preview: {
     type: String,
@@ -20,12 +20,12 @@ const PostSchema = new mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   updatedAt: {
     type: Date,
-    default: Date.now
-  }
+    default: Date.now,
+  },
 });
 
 PostSchema.statics = {
@@ -35,9 +35,8 @@ PostSchema.statics = {
       .then((item) => {
         if (item) {
           return item;
-        } else {
-          return Promise.reject('No such item exists!');
         }
+        return Promise.reject(new Error('No such item exists!'));
       });
   },
   getBySlug(slug) {
@@ -46,9 +45,8 @@ PostSchema.statics = {
       .then((item) => {
         if (item) {
           return item;
-        } else {
-          return Promise.reject('No such item exists!');
         }
+        return Promise.reject(new Error('No such item exists!'));
       });
   },
   list({ skip = 0, limit = 50 } = {}) {
@@ -58,6 +56,6 @@ PostSchema.statics = {
       .limit(+limit)
       .exec();
   },
-}
+};
 
-export default mongoose.model('Post', PostSchema); 
+export default mongoose.model('Post', PostSchema);

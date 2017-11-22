@@ -1,3 +1,3 @@
 export const posts = {
-  pageSize: 10
-}
+  pageSize: 10,
+};

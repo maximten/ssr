@@ -12,7 +12,7 @@ class RegisterContainer extends Component {
         <Helmet>
           <title>Sign up</title>
         </Helmet>
-        <RegisterForm {...this.props}/>
+        <RegisterForm {...this.props} />
       </div>
     );
   }

@@ -6,11 +6,8 @@ import App from '../../components/App';
 import { logout } from '../../redux/actions/user';
 
 class AppContainer extends Component {
-  constructor(props) {
-      super(props);
-  }
   render() {
-    return <App {...this.props}/>;
+    return <App {...this.props} />;
   }
 }
 
