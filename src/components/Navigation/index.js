@@ -18,7 +18,7 @@ export default class Navigation extends Component {
         {
           user && 
           <span className="navbar-brand">
-            { user.login }
+            { user.email }
           </span>
         }
         {

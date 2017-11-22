@@ -8,8 +8,8 @@ const getInitialState = (req) => {
   const promises = [];
   if (req.session.user_id) {
     const promise = User.findOne({ _id: req.session.user_id }).then((user) => {
-      const { login, email, avatar } = user;
-      return { user: { ...userState, user: { login, email, avatar } } };
+      const { email, avatar } = user;
+      return { user: { ...userState, user: { email, avatar } } };
     });
     promises.push(promise);
   }

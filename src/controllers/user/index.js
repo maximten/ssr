@@ -5,33 +5,37 @@ import _ from 'lodash';
 
 function register(req, res, next) {
   let newPath;
-  let { login, email, password } = req.body;
+  let { email, password } = req.body;
   const { avatar } = req.files;
   password = password ? User.hash(password) : null;
-  const model = new User({ login, email, password });
+  const model = new User({ email, password });
   model.save()
   .then((item) => {
-    const extenstion = avatar.path.split('.').pop();
-    const filename = User.hash(avatar.originalFilename) + '.' + extenstion;
-    newPath = `/store/${filename}`;
-    const stream = fs.createReadStream(avatar.path)
-    .pipe(fs.createWriteStream(`public${newPath}`));
-    return streamToPromise(stream);
+    if (avatar.size) {
+      const extenstion = avatar.path.split('.').pop();
+      const filename = User.hash(avatar.originalFilename) + '.' + extenstion;
+      newPath = `/store/${filename}`;
+      const stream = fs.createReadStream(avatar.path)
+      .pipe(fs.createWriteStream(`public${newPath}`));
+      return streamToPromise(stream);
+    }
   })
   .then(() => {
-    model.avatar = newPath;
-    return model.save();
+    if (avatar.size) {
+      model.avatar = newPath;
+      return model.save();
+    }
   })
   .then(() => {
     req.session.user_id = model._id;
     req.session.save((err) => {
-      const { login, email, avatar } = model;
-      res.json({ login, email, avatar });
+      const { email, avatar } = model;
+      res.json({ email, avatar });
     });
   })
   .catch((e) => {
     const message = e.code === 11000 ?
-    { login : "login or email already taken" } :
+    { email : "This email already taken" } :
     _.mapValues(e.errors, (item => item.kind)); 
     const error = {
       status: 400,
@@ -42,20 +46,20 @@ function register(req, res, next) {
 }
 
 function login(req, res, next) {
-  const { login, password } = req.body;
-  User.findOne({ login: login })
+  const { email, password } = req.body;
+  User.findOne({ email: email })
   .then((item) => {
     if (item && item.authenticate(password)) {
       req.session.user_id = item._id;
       req.session.save((err) => {
-        const { login, email, avatar } = item;
-        res.json({ login, email, avatar });
+        const { email, avatar } = item;
+        res.json({ email, avatar });
       });
     } else {
       throw {
         status: 400,
         message: {
-          login: "Login or password incorrect"
+          email: "Email or password incorrect"
         }
       };
     } 
@@ -74,8 +78,8 @@ function self(req, res, next) {
   User.findOne({ _id: req.session.user_id})
   .then((item) => {
     if (item) {
-      const { login, email, avatar } = item;
-      res.json({ login, email, avatar });
+      const { email, avatar } = item;
+      res.json({ email, avatar });
     } else {
       res.json(null);
     }

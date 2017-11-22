@@ -13,7 +13,7 @@ export default class RegisterForm extends Component {
     const { register } = this;
     const { user: { user, registerError } } = this.props;
     const classes = _.mapValues({ 
-      login: '', email: '', password: '',
+      email: '', password: '',
     }, (item, key) => {
       return classNames('form-control', { 'is-invalid': registerError && registerError.message[key] });
     });
@@ -26,15 +26,8 @@ export default class RegisterForm extends Component {
                 <h2>Sign up</h2>
                 <form onSubmit={register}>
                   <div className="form-group">
-                    <label>Login</label>
-                    <input name="login" type="text" className={classes.login} placeholder="username"/>
-                    <div className="invalid-feedback">
-                      {registerError && registerError.message.login}
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label>Email address</label>
-                    <input name="email" type="email" className={classes.email} placeholder="name@example.com"/>
+                    <label>Email</label>
+                    <input name="email" type="email" className={classes.email} placeholder="john@doe.com"/>
                     <div className="invalid-feedback">
                       {registerError && registerError.message.email}
                     </div>
