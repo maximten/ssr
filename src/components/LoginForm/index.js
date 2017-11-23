@@ -18,21 +18,28 @@ export default class LoginForm extends Component {
           <div className="col-md-6 offset-md-3">
             <div className="card">
               <div className="card-body">
-                <h2>Sign in</h2>
-                <form onSubmit={login}>
-                  <div className="form-group">
-                    <label htmlFor="email">Email</label>
-                    <input id="email" name="email" type="text" className={loginClass} placeholder="john@doe.com" />
-                    <div className="invalid-feedback">
-                      { loginError && loginError.message.login }
-                    </div>
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="password">Password</label>
-                    <input id="password" name="password" type="password" className={loginClass} />
-                  </div>
-                  <button type="submit" className="btn btn-primary">Sign up</button>
-                </form>
+                {
+                  !user ?
+                  <div> 
+                    <h2>Sign in</h2>
+                    <form onSubmit={login}>
+                      <div className="form-group">
+                        <label htmlFor="email">Email</label>
+                        <input id="email" name="email" type="text" className={loginClass} placeholder="john@doe.com" />
+                        <div className="invalid-feedback">
+                          { loginError && loginError.message.login }
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label htmlFor="password">Password</label>
+                        <input id="password" name="password" type="password" className={loginClass} />
+                      </div>
+                      <button type="submit" className="btn btn-primary">Sign up</button>
+                    </form>
+                  </div> 
+                  :
+                  <h2 className="text-success text-center">You're logged in!</h2>
+                }
               </div>
             </div>
           </div>
